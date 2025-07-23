@@ -17,11 +17,13 @@ function AddContact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
+
     try {
       const apiUrl = import.meta.env.VITE_API_BASE_URL;
       await axios.post(`${apiUrl}/api/contacts`, formData, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
+          Authorization: `Bearer ${token})}`
         }
       });
       navigate('/contacts');
