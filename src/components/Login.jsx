@@ -10,6 +10,9 @@ function Login() {
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
+  // ✅ Load BASE_URL from environment variable
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -17,7 +20,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:5000/api/users/login', formData)
+      const response = await axios.post(`${BASE_URL}/api/users/login`, formData)
       localStorage.setItem('token', response.data.accessToken)
       navigate('/contacts')
     } catch (err) {
