@@ -1,33 +1,34 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function AddContact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: ''
-  })
-  const [error, setError] = useState('')
-  const navigate = useNavigate()
+  });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/contacts', formData, {
+      const apiUrl = import.meta.env.VITE_API_BASE_URL;
+      await axios.post(`${apiUrl}/api/contacts`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
-      })
-      navigate('/contacts')
+      });
+      navigate('/contacts');
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to add contact')
+      setError(err.response?.data?.message || 'Failed to add contact');
     }
-  }
+  };
 
   return (
     <div className="max-w-md mx-auto mt-8">
@@ -75,7 +76,7 @@ function AddContact() {
         </button>
       </form>
     </div>
-  )
+  );
 }
 
-export default AddContact
+export default AddContact;

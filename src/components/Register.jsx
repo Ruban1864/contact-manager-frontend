@@ -18,7 +18,8 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:5000/api/users/register', formData)
+      const BASE_URL = import.meta.env.VITE_API_BASE_URL
+      const response = await axios.post(`${BASE_URL}/api/users/register`, formData)
       localStorage.setItem('token', response.data.accessToken)
       navigate('/contacts')
     } catch (err) {

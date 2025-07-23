@@ -11,7 +11,7 @@ function Login() {
   const navigate = useNavigate()
 
   // ✅ Load BASE_URL from environment variable
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -65,5 +65,6 @@ function Login() {
     </div>
   )
 }
+
 
 export default Login
