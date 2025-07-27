@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
   },
 });
 
-// Attach token to every request if available
+// Automatically attach token to every request
 axiosInstance.interceptors.request.use(
   (config) => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -16,9 +16,7 @@ axiosInstance.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 export default axiosInstance;

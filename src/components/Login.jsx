@@ -21,7 +21,7 @@ function Login() {
     e.preventDefault()
     try {
       const response = await axios.post(`${BASE_URL}/api/users/login`, formData)
-      localStorage.setItem('token', response.data.accessToken)
+      localStorage.setItem('userInfo', JSON.stringify({ token: response.data.accessToken }));
       navigate('/contacts')
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed')

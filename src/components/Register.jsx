@@ -20,7 +20,7 @@ function Register() {
     try {
       const BASE_URL = import.meta.env.VITE_API_BASE_URL
       const response = await axios.post(`${BASE_URL}/api/users/register`, formData)
-      localStorage.setItem('token', response.data.accessToken)
+     localStorage.setItem('userInfo', JSON.stringify({ token: response.data.accessToken }));
       navigate('/contacts')
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed')

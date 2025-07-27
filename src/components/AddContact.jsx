@@ -1,13 +1,9 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from './axios';
 
 function AddContact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: ''
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -17,15 +13,9 @@ function AddContact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
-
     try {
-      const apiUrl = import.meta.env.VITE_API_BASE_URL;
-      await axios.post(`${apiUrl}/api/contacts`, formData, {
-        headers: {
-          Authorization: `Bearer ${token})}`
-        }
-      });
+      const apiurl = process.env.VITE_API_BASE_URL
+      await axiosInstance.post(`${apiurl}/contacts`, formData);
       navigate('/contacts');
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to add contact');
@@ -39,43 +29,17 @@ function AddContact() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-            required
-          />
+          <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-2 border rounded" required />
         </div>
         <div>
           <label className="block mb-1">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-            required
-          />
+          <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full p-2 border rounded" required />
         </div>
         <div>
           <label className="block mb-1">Phone</label>
-          <input
-            type="text"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-            required
-          />
+          <input type="text" name="phone" value={formData.phone} onChange={handleChange} className="w-full p-2 border rounded" required />
         </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
-        >
-          Add Contact
-        </button>
+        <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Add Contact</button>
       </form>
     </div>
   );
