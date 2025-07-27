@@ -1,6 +1,6 @@
 // import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from './axios';
+import axiosInstance from '../axios';
 
 function AddContact() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
