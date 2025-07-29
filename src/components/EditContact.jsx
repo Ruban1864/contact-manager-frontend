@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from '../axios'
 
 // Use environment-aware base URL
-const BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
+const BASE_URL = import.meta.env.VITE_BACKEND_URL || 'https://contact-manager-backend-1-vz2e.onrender.com'
 
 function EditContact() {
   const [formData, setFormData] = useState({

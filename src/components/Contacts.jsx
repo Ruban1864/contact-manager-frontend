@@ -9,7 +9,7 @@ function Contacts() {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await axios.get('https://contact-manager-backend-p7la.onrender.com/api/contacts', {
+        const response = await axios.get('https://contact-manager-backend-1-vz2e.onrender.com/api/contacts', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
@@ -24,7 +24,7 @@ function Contacts() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://contact-manager-backend-p7la.onrender.com/api/contacts/${id}`, {
+      await axios.delete(`https://contact-manager-backend-1-vz2e.onrender.com/api/contacts/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
