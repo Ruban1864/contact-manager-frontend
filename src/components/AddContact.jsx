@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../axios';
 
@@ -14,8 +14,8 @@ function AddContact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const apiurl = process.env.VITE_API_BASE_URL
-      await axiosInstance.post(`${apiurl}/contacts`, formData);
+      const apiurl = import.meta.env.VITE_API_BASE_URL; // Vite uses import.meta.env not process.env
+      await axiosInstance.post(`${apiurl}/api/contacts`, formData);
       navigate('/contacts');
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to add contact');
@@ -29,17 +29,43 @@ function AddContact() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1">Name</label>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-2 border rounded" required />
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
         </div>
         <div>
           <label className="block mb-1">Email</label>
-          <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full p-2 border rounded" required />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
         </div>
         <div>
           <label className="block mb-1">Phone</label>
-          <input type="text" name="phone" value={formData.phone} onChange={handleChange} className="w-full p-2 border rounded" required />
+          <input
+            type="text"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
         </div>
-        <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Add Contact</button>
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+        >
+          Add Contact
+        </button>
       </form>
     </div>
   );
